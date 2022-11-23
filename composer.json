@@ -1,0 +1,24 @@
+{
+    "name": "elsweb/challenger-webdec-mvc",
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "Controllers/",
+            "Model\\": "Model/",
+            "View\\": "View/"
+        },
+        "files": ["config.php"]
+    },
+    "authors": [
+        {
+            "name": "Emanuel Lds",
+            "email": "elsweb.contato@gmail.com"
+        }
+    ],
+    "require": {
+        "simple-crud/simple-crud": "^7.5",
+        "symfony/dotenv": "^5.4",
+        "coffeecode/router": "^1.0",
+        "jenssegers/blade": "^1.4",
+        "analog/analog": "^1.0"
+    }
+}
