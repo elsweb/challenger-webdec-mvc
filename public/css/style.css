@@ -1,10 +1,38 @@
 body,
 html {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	background: #2287a5 !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #2287a5 !important;
 }
+
+/**/
+#loadpreload {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  z-index: 99999;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: none;
+}
+
+#loadpreload img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+#msgload {
+  display: none;
+}
+#msgload .alert{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  border-radius: 0; text-align: center;
+}
+
+
 /**/
 #authform .user_card {
   height: 400px;
@@ -22,6 +50,7 @@ html {
   -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
 }
+
 #authform .brand_logo_container {
   position: absolute;
   height: 170px;
@@ -32,41 +61,50 @@ html {
   padding: 10px;
   text-align: center;
 }
+
 #authform .brand_logo {
   height: 150px;
   width: 150px;
   border-radius: 50%;
   border: 2px solid white;
 }
+
 #authform .form_container {
   margin-top: 100px;
 }
-#authform .form_container .input-group-text{
+
+#authform .form_container .input-group-text {
   height: 100%;
 }
+
 #authform .login_btn {
   width: 100%;
   background: #2287a5 !important;
   color: white !important;
 }
+
 #authform .login_btn:focus {
   box-shadow: none !important;
   outline: 0px !important;
 }
+
 #authform .login_container {
   padding: 0 2rem;
 }
+
 #authform .input-group-text {
   background: #2287a5 !important;
   color: white !important;
   border: 0 !important;
   border-radius: 0.25rem 0 0 0.25rem !important;
 }
+
 #authform .input_user,
 #authform .input_pass:focus {
   box-shadow: none !important;
   outline: 0px !important;
 }
-#authform .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+
+#authform .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
   background-color: #2287a5 !important;
 }

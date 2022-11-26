@@ -7,13 +7,12 @@ class Home
     {
         $auth = new \Controllers\Auth();
         if($auth->getSession() !== 'VALID'):
-            header("Location: ".APP['BASE_URL'] ?? 'localhost'."/login");
+            $url = (APP['BASE_URL'] ?? 'localhost')."/login" ;
+            header("Location: {$url}");
         endif;
     }
     public function index($data)
     {
-        $auth = new Auth();
-
-        echo "Home here {$auth->getSession()}";
+        echo "Home here";
     }
 }
