@@ -23,6 +23,7 @@
         "analog/analog": "^1.0",
         "lulco/phoenix": "^1.12",
         "aura/auth": "^4.0",
-        "josantonius/request": "^2.0"
+        "josantonius/request": "^2.0",
+        "gilbitron/easycsrf": "^1.5"
     }
 }

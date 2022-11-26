@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca9123f47a5be931d2f8c067916da1b2",
+    "content-hash": "3520c709c62c948e4476aff15e103a31",
     "packages": [
         {
             "name": "analog/analog",
@@ -394,6 +394,55 @@
                 }
             ],
             "time": "2022-10-20T09:10:12+00:00"
+        },
+        {
+            "name": "gilbitron/easycsrf",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gilbitron/EasyCSRF.git",
+                "reference": "e09c3726e33911663e88fb50e0c8030a445a7d92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gilbitron/EasyCSRF/zipball/e09c3726e33911663e88fb50e0c8030a445a7d92",
+                "reference": "e09c3726e33911663e88fb50e0c8030a445a7d92",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasyCSRF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gilbert Pellegrom",
+                    "email": "gilbert@pellegrom.me"
+                }
+            ],
+            "description": "A simple, standalone CSRF protection library",
+            "support": {
+                "issues": "https://github.com/gilbitron/EasyCSRF/issues",
+                "source": "https://github.com/gilbitron/EasyCSRF/tree/1.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/gilbitron",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-12-27T14:29:27+00:00"
         },
         {
             "name": "illuminate/bus",
