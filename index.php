@@ -18,6 +18,7 @@ $router->get("/pessoas", "Pessoas:index");
 $router->post("/pessoas", "Pessoas:listar");
 $router->post("/pessoas/save", "Pessoas:create");
 $router->delete("/pessoas/delete/{id}", "Pessoas:delete");
+$router->get("/pessoas/view/{}", "Pessoas:view");
 
 
 $router->post("/json",function(){

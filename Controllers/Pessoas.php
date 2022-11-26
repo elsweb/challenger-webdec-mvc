@@ -127,11 +127,8 @@ class Pessoas
                     'cpf' => $request['cpf'] ?? null,
                     'rg' => $request['rg'] ?? null,
                     'enderecos_id' => $enderecos->id,
-                    // 'data_nascimento' => '2022-11-15', //fix this
-                    // 'data_cadastro' => '2022-11-22 00:00:00', //fix this
-                    // 'data_atualizacao' => '2022-11-22 00:00:00', //fix this
-                    // 'data_exclusao' => '2022-11-22 00:00:00', //fix this
-
+                    'data_nascimento' => $request['data_nascimento'] ?? null, //fix this
+                    'data_cadastro' => date('Y-m-d H:i:s'),
                 ]);
                 $pessoas->save();
 

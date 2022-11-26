@@ -120,6 +120,13 @@
                             <input type="text" name="nome" id="nome" class="form-control input_user"
                                 required="required">
                         </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Nascimento*</span>
+                            </div>
+                            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control input_user"
+                                required="required">
+                        </div>
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <div class="input-group mb-3">
