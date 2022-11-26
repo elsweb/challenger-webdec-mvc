@@ -2,6 +2,7 @@ $(document).ready(function () {
     fechData()
 });
 $(document).on('click', '.delete', function () {
+    $("#datatable tbody tr td a").addClass('disabled');
     var table = $('#datatable').DataTable();
     let id = table.row($(this).parents('tr')).data()[0]
     let row = table.row($(this).parents('tr'))
@@ -9,7 +10,6 @@ $(document).on('click', '.delete', function () {
 });
 
 function fechData() {
-    // $('#datatable').fadeOut().html('')
     $('#loadpreloadlist').fadeIn('slow')
     let base = $('meta[name=base_url]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
@@ -83,6 +83,7 @@ function create() {
 function remove(id, row) {
     let base = $('meta[name=base_url]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
+    $('#loadpreloaddelete').fadeIn('slow')
     $.ajax({
         url: `${base}/pessoas/delete/${id}`,
         type: "DELETE",
@@ -97,6 +98,8 @@ function remove(id, row) {
             }
             if (response.status) {
                 row.remove().draw()
+                $('#loadpreloaddelete').fadeOut('slow')
+                $("#datatable tbody tr td a").removeClass('disabled');
             }
         },
         error: function (error) {

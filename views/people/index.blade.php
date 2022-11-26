@@ -60,6 +60,9 @@
                                     <a href="javascript:;" data-toggle="modal" data-target="#registerModal"><i
                                             class='fas fa-user-plus' style='font-size: 1.5rem;'></i></a>
                                 </div>
+                                <div id="loadpreloaddelete">
+                                    <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
+                                </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <div id="loadpreloadlist">

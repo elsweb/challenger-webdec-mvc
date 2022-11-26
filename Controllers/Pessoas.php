@@ -72,7 +72,7 @@ class Pessoas
                     $num,
                     [
                         "<a href='javascript:edit(\"{$value->id}\");'><i class='far fa-edit' style='font-size: 1.3rem;'></i></a>",
-                        "<a href='#' class='delete'><i class='far fa-trash-alt' style='font-size: 1.3rem;'></i></a>"
+                        "<a href='javascript:;' class='delete'><i class='far fa-trash-alt' style='font-size: 1.3rem;'></i></a>"
                     ]
                 ];
             }
@@ -150,7 +150,7 @@ class Pessoas
                         ],
                         [
                             "<a href='javascript:edit(\"{$pessoas->id}\");'><i class='far fa-edit' style='font-size: 1.3rem;'></i></a>",
-                            "<a href='javascript:remove(\"{$pessoas->id}\");'><i class='far fa-trash-alt' style='font-size: 1.3rem;'></i></a>"
+                            "<a href='javascript:;' class='delete'><i class='far fa-trash-alt' style='font-size: 1.3rem;'></i></a>"
                         ]
                     ],
                     'token' => $csrf->csrf(), // reload token for user login
@@ -190,9 +190,9 @@ class Pessoas
                     'pessoas' => \Model\Pessoas::class,
                 ]);
                 $pessoas = $db->pessoas->select()
-                ->whereEquals([
-                    'id' => $id,
-                ])->one()->get();
+                    ->whereEquals([
+                        'id' => $id,
+                    ])->one()->get();
                 $pessoas->data_exclusao = date('Y-m-d H:i:s');
                 $pessoas->save();
                 echo json_encode([
@@ -205,8 +205,7 @@ class Pessoas
                     "status" => false,
                     "msg" => "Falha ao conectar",
                     'error' => $ex,
-                    'token' => $csrf->csrf(), // reload token 
-
+                    'token' => $csrf->csrf(),
                 ]);
                 return false;
             }

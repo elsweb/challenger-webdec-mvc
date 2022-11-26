@@ -5,6 +5,11 @@ html {
   height: 100%;
   background: #2287a5 !important;
 }
+a.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}
 
 /**/
 #loadpreload {
@@ -31,6 +36,11 @@ html {
 #loadpreloadlist{
   width: 100%;
   text-align: center;
+  display: none;
+}
+#loadpreloaddelete{
+  position: absolute;
+  right: 0;
   display: none;
 }
 
