@@ -10,6 +10,11 @@ $router->group(null)->namespace("Controllers");
 
 $router->get("/", "Home:index");
 $router->get("/login", "Auth:index");
+$router->post("/login", "Auth:login");
+$router->get("/json",function(){
+    header('Content-type: application/json');
+    echo json_encode($_SERVER);
+});
 
 $router->group("error");
 $router->get("/{errcode}", function ($request) {

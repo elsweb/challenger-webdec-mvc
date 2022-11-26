@@ -7,6 +7,6 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>{{$name}}</h1>
+    <h1>teste</h1>
 </body>
 </html>
