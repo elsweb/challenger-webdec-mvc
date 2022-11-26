@@ -7,7 +7,7 @@ class Estados extends AbstractMigration
     protected function up(): void
     {
         $this->table('estados')
-            ->addColumn('uf', 'char')
+            ->addColumn('uf', 'char', ["null" => true,])
             ->create();
     }
 

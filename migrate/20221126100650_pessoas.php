@@ -7,15 +7,15 @@ class Pessoas extends AbstractMigration
     protected function up(): void
     {
         $this->table('pessoas')
-            ->addColumn('endereco_id', 'integer')
-            ->addForeignKey('endereco_id', 'enderecos', 'id')
-            ->addColumn('nome', 'string')
-            ->addColumn('cpf', 'string')
-            ->addColumn('rg', 'string')
-            ->addColumn('data_nascimento', 'date')
-            ->addColumn('data_cadastro', 'datetime')
-            ->addColumn('data_atualizacao', 'datetime')
-            ->addColumn('data_exclusao', 'datetime')
+            ->addColumn('enderecos_id', 'integer', ["null" => true,])
+            ->addForeignKey('enderecos_id', 'enderecos', 'id')
+            ->addColumn('nome', 'string', ["null" => true,])
+            ->addColumn('cpf', 'string', ["null" => true,])
+            ->addColumn('rg', 'string', ["null" => true,])
+            ->addColumn('data_nascimento', 'date', ["null" => true,])
+            ->addColumn('data_cadastro', 'datetime', ["null" => true,])
+            ->addColumn('data_atualizacao', 'datetime', ["null" => true,])
+            ->addColumn('data_exclusao', 'datetime', ["null" => true,])
             ->create();
     }
 

@@ -13,6 +13,12 @@ $router->get("/login", "Auth:index");
 $router->post("/login", "Auth:login");
 $router->post("/register", "Auth:register");
 
+/*module people*/
+$router->get("/pessoas", "Pessoas:index");
+$router->post("/pessoas", "Pessoas:listar");
+$router->post("/pessoas/save", "Pessoas:create");
+$router->delete("/pessoas/delete/{id}", "Pessoas:delete");
+
 
 $router->post("/json",function(){
     header('Content-type: application/json');

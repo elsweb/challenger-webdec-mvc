@@ -7,11 +7,11 @@ class Enderecos extends AbstractMigration
     protected function up(): void
     {
         $this->table('enderecos')            
-            ->addColumn('estado_id', 'integer')
-            ->addColumn('cep', 'string')
-            ->addColumn('endereco', 'string')
-            ->addColumn('numero', 'string')
-            ->addForeignKey('estado_id', 'estados', 'id')
+            ->addColumn('estados_id', 'integer', ["null" => true,])
+            ->addForeignKey('estados_id', 'estados', 'id')
+            ->addColumn('cep', 'string', ["null" => true,])
+            ->addColumn('endereco', 'string', ["null" => true,])
+            ->addColumn('numero', 'string', ["null" => true,])            
             ->create();
     }
 

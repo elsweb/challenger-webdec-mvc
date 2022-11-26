@@ -4,8 +4,8 @@
 <head>
     <title>Challenger Webdec MVC</title>
     <meta name="base_url" content="{{APP['BASE_URL'] ?? 'localhost'}}">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf" content="{{$csrf ?? null}}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">    
     <link href="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/bootstrap502/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link href="{{APP['BASE_URL'] ?? 'localhost'}}/public/css/style.css?t={{time()}}" rel="stylesheet">

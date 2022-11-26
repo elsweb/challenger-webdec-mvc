@@ -28,6 +28,11 @@ html {
   right: 0;
   display: none;
 }
+#loadpreloadlist{
+  width: 100%;
+  text-align: center;
+  display: none;
+}
 
 #msgload {
   display: none;

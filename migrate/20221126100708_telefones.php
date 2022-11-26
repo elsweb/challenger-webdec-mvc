@@ -7,9 +7,9 @@ class Telefones extends AbstractMigration
     protected function up(): void
     {
         $this->table('telefones')
-            ->addColumn('pessoa_id', 'integer')
-            ->addForeignKey('pessoa_id', 'pessoas', 'id')
-            ->addColumn('telefone', 'string')
+            ->addColumn('pessoas_id', 'integer', ["null" => true,])
+            ->addForeignKey('pessoas_id', 'pessoas', 'id')
+            ->addColumn('telefone', 'string', ["null" => true,])
             ->create();
     }
 

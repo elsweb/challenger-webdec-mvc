@@ -49,6 +49,7 @@ function register() {
             if (response.status) {
                 $('#registerform').trigger("reset");
                 $('#registerModal').modal('toggle');
+                $('#loadpreloadreg').fadeOut('slow');
             } else {
                 $('#loadpreloadreg').fadeOut('slow').queue(function () {
                     $('#msgloadreg').fadeIn('slow')
