@@ -14,7 +14,6 @@ class Usuarios extends AbstractMigration
 
     protected function down(): void
     {
-        $this->table('usuarios')
-            ->drop();
+        $this->table('usuarios')->drop();
     }
 }
