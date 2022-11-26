@@ -1,5 +1,6 @@
 <?php
 namespace Controllers;
+use Jenssegers\Blade\Blade;
 
 class Home
 {
@@ -13,6 +14,10 @@ class Home
     }
     public function index($data)
     {
-        echo "Home here";
+        $csrf = new \Controllers\CsrfProtect();
+        $blade = new Blade('views', 'cache');
+        echo $blade->make('index', [
+            'csrf' => $csrf->csrf()
+        ])->render();
     }
 }
