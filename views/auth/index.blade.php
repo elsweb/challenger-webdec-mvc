@@ -16,9 +16,7 @@
         <img width="50" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
     </div>
     <div id="msgload">
-        <div class="alert alert-primary" role="alert">
-            A simple primary alert—check it out!
-        </div>
+        <div class="alert alert-primary" role="alert"></div>
     </div>
     <div id="authform" class="container h-100">
         <div class="d-flex justify-content-center h-100">
@@ -41,8 +39,11 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="password" class="form-control input_pass" placeholder="senha"
-                                required="required">
+                            <input type="password" name="password" id="password" class="form-control input_pass"
+                                placeholder="senha" required="required">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i id="togglePassword" class="fas fa-eye"></i></span>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <button type="submit" name="button" class="btn login_btn">Acessar</button>
@@ -51,17 +52,58 @@
                 </div>
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
-                        Não tem uma conta? <a href="#" class="ml-2">Inscrever-se</a>
+                        Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"
+                            class="ml-2">Inscrever-se</a>
                     </div>
                     <div class="d-flex justify-content-center links">
                         <a href="#">Esqueceu sua senha?</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/jquery361.min.js?t={{time()}}"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Crie sua conta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerform" onSubmit="register(); return false">
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="username" class="form-control input_user" placeholder="usuario"
+                                required="required">
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" name="password" id="passwordRegister" class="form-control input_pass"
+                                placeholder="senha" required="required">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i id="togglePasswordRegister"
+                                        class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                        <button id="submit_reg" type="submit" class="btn btn-primary">Enviar</button>
+                        <div id="loadpreloadreg">
+                            <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
+                        </div>
+                    </form>
+                    <div id="msgloadreg">
+                        <div class="alert alert-primary" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/jquery361.min.js"></script>
+    <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/bootstrap502/js/bootstrap.min.js"></script>
     <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/js/auth.js?t={{time()}}"></script>
 </body>
 

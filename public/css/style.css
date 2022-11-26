@@ -21,15 +21,34 @@ html {
   bottom: 0;
   right: 0;
 }
+
+#loadpreloadreg {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  display: none;
+}
+
 #msgload {
   display: none;
 }
-#msgload .alert{
+
+#msgload .alert {
   position: absolute;
   bottom: 0;
   width: 100%;
   margin: 0;
-  border-radius: 0; text-align: center;
+  border-radius: 0;
+  text-align: center;
+}
+
+#msgloadreg {
+  display: none;
+}
+
+#msgloadreg .alert {
+  margin: 10px 0;
+  text-align: center;
 }
 
 
@@ -73,7 +92,8 @@ html {
   margin-top: 100px;
 }
 
-#authform .form_container .input-group-text {
+#authform .form_container .input-group-text,
+#registerform .input-group-text {
   height: 100%;
 }
 

@@ -11,6 +11,9 @@ $router->group(null)->namespace("Controllers");
 $router->get("/", "Home:index");
 $router->get("/login", "Auth:index");
 $router->post("/login", "Auth:login");
+$router->post("/register", "Auth:register");
+
+
 $router->post("/json",function(){
     header('Content-type: application/json');
     echo json_encode([

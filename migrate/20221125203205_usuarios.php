@@ -9,7 +9,6 @@ class Usuarios extends AbstractMigration
         $this->table('usuarios')
             ->addColumn('username', 'string')
             ->addColumn('password', 'string')
-            ->addColumn('email', 'string')
             ->create();
     }
 
