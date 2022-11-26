@@ -107,11 +107,24 @@ class Pessoas
                 $db->setTablesClasses([
                     'pessoas' => \Model\Pessoas::class,
                 ]);
-                /*create estados*/
-                $estado = $db->estados->create([
-                    'uf' => $request['uf'] ?? null,
-                ]);
-                $estado->save();
+
+                /*ajustments uf*/
+                $request['uf'] = mb_strtoupper($request['uf']);
+                /*get exists uf*/
+                $estados_check = $db->estados->select()
+                    ->whereEquals([
+                        'uf' => $request['uf'] ?? null,
+                    ])->one()->get();
+                if(is_null($estados_check)):                    
+                    /*create estados*/
+                    $estado = $db->estados->create([
+                        'uf' => $request['uf'] ?? null,
+                    ]);
+                    $estado->save();
+                else:
+                    $estado = $estados_check;
+                endif;
+                
                 /*create enderecos*/
                 $enderecos = $db->enderecos->create([
                     'estados_id' => $estado->id,
@@ -135,6 +148,7 @@ class Pessoas
                 echo json_encode([
                     'status' => true,
                     'msg' => "Obrigado por se cadastrar, agora pode acessar",
+                    'check' => $estados_check,
                     'row' => [
                         $pessoas->id,
                         $pessoas->nome,

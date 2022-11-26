@@ -124,8 +124,8 @@
                             <div class="input-group-append">
                                 <span class="input-group-text">Nascimento*</span>
                             </div>
-                            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control input_user"
-                                required="required">
+                            <input type="date" name="data_nascimento" id="data_nascimento"
+                                class="form-control input_user" required="required">
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-6">
@@ -155,7 +155,7 @@
                                         <span class="input-group-text">Estado*</span>
                                     </div>
                                     <input type="text" name="uf" id="uf" class="form-control input_pass"
-                                        required="required">
+                                        required="required" maxlength="2">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -204,6 +204,8 @@
     <!-- jQuery -->
     <script src="{{APP['BASE_URL'] ??
             'localhost'}}/public/assets/adminLTE320/plugins/jquery/jquery.min.js"></script>
+    <script src="{{APP['BASE_URL'] ??
+            'localhost'}}/public/assets/adminLTE320/plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{APP['BASE_URL'] ??
             'localhost'}}/public/assets/adminLTE320/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

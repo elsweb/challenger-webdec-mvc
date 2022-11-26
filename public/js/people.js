@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    fechData()
+    $('#cpf').inputmask('999.999.999-99')
+    $("#cep").inputmask("99999-999")
+    $('#rg').inputmask('99.999.999-9')
+    fechData()    
 });
 $(document).on('click', '.delete', function () {
     $("#datatable tbody tr td a").addClass('disabled');
@@ -56,6 +59,7 @@ function create() {
             'X-CSRF-TOKEN': csrf,
         },
         success: function (response) {
+            console.log(response)
             $('#msgloadreg .alert').html(response.msg)
             /*reload token for user login*/
             if (response.token !== undefined) {
