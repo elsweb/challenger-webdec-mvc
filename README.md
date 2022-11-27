@@ -68,4 +68,3 @@ Skills used
 ![N|Solid](https://drive.google.com/uc?id=1eb_OLqKHFUPs6x-Ysv62feXHFyLbPRA1)<json>
 ![N|Solid](https://drive.google.com/uc?id=17mICnyngBMzHsD2mWofK1S--4YYondcY)<git>
 ![N|Solid](https://drive.google.com/uc?id=1F6xcgfgNN5LxPtFOQhJG73qsatbJqZlL)<github>
-![N|Solid](https://drive.google.com/uc?id=1ldC35vLAOBM1YxuK8BLqYOeeZLp62T9y)<sublimetext>
