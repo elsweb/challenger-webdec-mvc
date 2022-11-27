@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Jenssegers\Blade\Blade;
 use Josantonius\Request\Request;
+use \Controllers\Validator;
 
 class Pessoas
 {
@@ -101,13 +102,43 @@ class Pessoas
         $csrf = new \Controllers\CsrfProtect();
         if ($csrf->check($_SERVER['HTTP_X_CSRF_TOKEN'])):
             $request = Request::input('POST')()->asArray();
+            /*validate*/
+            $check = new Validator();
+            $request['cpf'] = $check->onlyNumbers($request['cpf']);
+            $request['cep'] = $check->onlyNumbers($request['cep']);
+            $request['rg'] = $check->onlyNumbers($request['rg']);
+            if(!$check->validaCpf($request['cpf'])):
+                echo json_encode([
+                    'status' => false,
+                    'msg' => "CPF inválido",
+                    'token' => $csrf->csrf(), 
+                ]);
+                return false;
+            endif;
             try {
                 $pdo = new \PDO("mysql:host=" . APP['DB_HOST'] . ";port=" . APP['DB_PORT'] . ";dbname=" . APP['DB_DATABASE'] . ";charset=utf8mb4", APP['DB_USERNAME'], APP['DB_PASSWORD']);
+                $cpfexists = $check->existsCpf($pdo, 'pessoas','cpf', $request['cpf']);
+                $rgfexists = $check->existsCpf($pdo, 'pessoas','rg', $request['rg']);
+                if(!is_null($cpfexists) && is_null($cpfexists->data_exclusao)):
+                    echo json_encode([
+                        'status' => false,
+                        'msg' => "CPF já cadastrado",
+                        'token' => $csrf->csrf(), 
+                    ]);
+                    return false;
+                endif;  
+                if(!is_null($rgfexists) && is_null($rgfexists->data_exclusao)):
+                    echo json_encode([
+                        'status' => false,
+                        'msg' => "RG já cadastrado",
+                        'token' => $csrf->csrf(), 
+                    ]);
+                    return false;
+                endif;                
                 $db = new \SimpleCrud\Database($pdo);
                 $db->setTablesClasses([
                     'pessoas' => \Model\Pessoas::class,
                 ]);
-
                 /*ajustments uf*/
                 $request['uf'] = mb_strtoupper($request['uf']);
                 /*get exists uf*/

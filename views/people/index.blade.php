@@ -188,7 +188,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="submit_reg" type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="javascript:clearForm('peopleform');" class="btn btn-primary">Limpar</a>
+                        <button id="submit_reg" type="submit" class="btn btn-primary" style="float: right;">Salvar</button>                        
                         <div id="loadpreloadreg">
                             <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
                         </div>

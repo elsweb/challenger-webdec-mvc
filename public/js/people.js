@@ -11,7 +11,9 @@ $(document).on('click', '.delete', function () {
     let row = table.row($(this).parents('tr'))
     remove(id, row)
 });
-
+function clearForm(form){
+    $(`#${form}`).trigger("reset");
+}
 function fechData() {
     $('#loadpreloadlist').fadeIn('slow')
     let base = $('meta[name=base_url]').attr('content')
