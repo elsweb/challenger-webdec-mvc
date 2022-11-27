@@ -126,9 +126,9 @@ class Pessoas
             endif;
             try {
                 $pdo = new \PDO("mysql:host=" . APP['DB_HOST'] . ";port=" . APP['DB_PORT'] . ";dbname=" . APP['DB_DATABASE'] . ";charset=utf8mb4", APP['DB_USERNAME'], APP['DB_PASSWORD']);
-                $cpfexists = $check->existsCpf($pdo, 'pessoas','cpf', $request['cpf']);
-                $rgfexists = $check->existsCpf($pdo, 'pessoas','rg', $request['rg']);
-                if(!is_null($cpfexists) && is_null($cpfexists->data_exclusao)):
+                $existsCpf = $check->existsDoc($pdo, 'pessoas','cpf', $request['cpf']);
+                $existsRg = $check->existsDoc($pdo, 'pessoas','rg', $request['rg']);
+                if(!is_null($existsCpf) && is_null($existsCpf->data_exclusao)):
                     echo json_encode([
                         'status' => false,
                         'msg' => "CPF já cadastrado",
@@ -136,7 +136,7 @@ class Pessoas
                     ]);
                     return false;
                 endif;  
-                if(!is_null($rgfexists) && is_null($rgfexists->data_exclusao)):
+                if(!is_null($existsRg) && is_null($existsRg->data_exclusao)):
                     echo json_encode([
                         'status' => false,
                         'msg' => "RG já cadastrado",
@@ -269,8 +269,8 @@ class Pessoas
                         'id' => $request['id'] ?? null,
                     ])->one()->get();
                 if($pessoas->cpf !== $request['cpf']):
-                    $cpfexists = $check->existsCpf($pdo, 'pessoas','cpf', $request['cpf']);
-                    if(!is_null($cpfexists) && is_null($cpfexists->data_exclusao)):
+                    $existsCpf = $check->existsDoc($pdo, 'pessoas','cpf', $request['cpf']);
+                    if(!is_null($existsCpf) && is_null($existsCpf->data_exclusao)):
                         echo json_encode([
                             'status' => false,
                             'msg' => "CPF já cadastrado",
@@ -280,8 +280,8 @@ class Pessoas
                     endif;  
                 endif;
                 if($pessoas->rg !== $request['rg']):
-                    $rgfexists = $check->existsCpf($pdo, 'pessoas','rg', $request['rg']);
-                    if(!is_null($rgfexists) && is_null($rgfexists->data_exclusao)):
+                    $existsRg = $check->existsDoc($pdo, 'pessoas','rg', $request['rg']);
+                    if(!is_null($existsRg) && is_null($existsRg->data_exclusao)):
                         echo json_encode([
                             'status' => false,
                             'msg' => "RG já cadastrado",

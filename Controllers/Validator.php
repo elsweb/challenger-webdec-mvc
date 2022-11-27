@@ -40,13 +40,25 @@ class Validator
     {
         return preg_replace('/[^0-9]/', '', $string);
     }
-    public function existsCpf($pdo, $table,$typedoc, $doc)
+    public function existsDoc($pdo, $table,$typedoc, $doc)
     {
         $db = new \SimpleCrud\Database($pdo);
         $db->setTablesClasses([
             $table => \Model\Pessoas::class,
         ]);
         $check = $db->$table->select()->whereEquals([$typedoc => $doc,])->one()->get();
+        
+        return $check;
+    }
+    public function existsPhone($pdo,$phone)
+    {
+        $db = new \SimpleCrud\Database($pdo);
+        $db->setTablesClasses([
+            'telefones' => \Model\Telefones::class,
+        ]);
+        $check = $db->telefones->select()->whereEquals([
+            'telefone' => $phone,
+        ])->one()->get();
         
         return $check;
     }

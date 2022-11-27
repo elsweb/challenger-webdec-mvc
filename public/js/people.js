@@ -21,7 +21,6 @@ $(document).on('click', '.delete', function () {
     let row = table.row($(this).parents('tr'))
     remove(id, row)
 });
-
 function fechData() {
     $('#loadpreloadlist').fadeIn('slow')
     let base = $('meta[name=base_url]').attr('content')
@@ -59,9 +58,9 @@ function save() {
     }
     return false
 }
-function add(){
+function add() {
     clearForm('peopleform')
-    $('#msgloadreg').css('display','none')
+    $('#msgloadreg').css('display', 'none')
     $('#btnclear').css('display', 'inline-block')
     $('#registerModal').modal('toggle')
 }
@@ -152,7 +151,7 @@ function update() {
         url: `${base}/pessoas/update`,
         type: "POST",
         data: $('#peopleform').serialize(),
-        headers: {            
+        headers: {
             'X-CSRF-TOKEN': csrf,
         },
         success: function (response) {
@@ -166,7 +165,7 @@ function update() {
                 clearForm('peopleform')
                 updateRow(response.data)
                 $('#registerModal').modal('toggle')
-                $('#loadpreloadreg').fadeOut('slow')               
+                $('#loadpreloadreg').fadeOut('slow')
             } else {
                 $('#loadpreloadreg').fadeOut('slow').queue(function () {
                     $('#msgloadreg').fadeIn('slow')
@@ -186,8 +185,8 @@ function edit(id, row) {
     let csrf = $('meta[name=csrf]').attr('content')
     $("#datatable tbody tr td a").addClass('disabled')
     $('#loadpreloaddelete').fadeIn('slow')
-    $('#btnclear').css('display', 'none') 
-    $('#msgloadreg').css('display','none')   
+    $('#btnclear').css('display', 'none')
+    $('#msgloadreg').css('display', 'none')
     $.ajax({
         url: `${base}/pessoas/view/${id}`,
         type: "GET",
@@ -230,7 +229,4 @@ function edit(id, row) {
             console.log(error)
         }
     });
-}
-function addphone($id) {
-    alert($id)
 }

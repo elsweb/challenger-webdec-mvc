@@ -27,7 +27,7 @@ a.disabled {
   right: 0;
 }
 
-#loadpreloadreg {
+#loadpreloadreg, #loadpreloadphone {
   position: absolute;
   bottom: 0px;
   right: 0;
@@ -57,11 +57,11 @@ a.disabled {
   text-align: center;
 }
 
-#msgloadreg {
+#msgloadreg, #msgloadphone {
   display: none;
 }
 
-#msgloadreg .alert {
+#msgloadreg .alert, #msgloadphone .alert {
   margin: 10px 0;
   text-align: center;
 }
