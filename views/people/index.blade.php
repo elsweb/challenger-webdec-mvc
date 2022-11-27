@@ -57,8 +57,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div style="width: 100%; margin: 10px;">
-                                    <a href="javascript:;" data-toggle="modal" data-target="#registerModal"><i
-                                            class='fas fa-user-plus' style='font-size: 1.5rem;'></i></a>
+                                    <a href="javascript:add();"><i class='fas fa-user-plus' style='font-size: 1.5rem;'></i></a>
                                 </div>
                                 <div id="loadpreloaddelete">
                                     <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
@@ -112,7 +111,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="peopleform" onSubmit="create(); return false">
+                    <form id="peopleform" onSubmit="save(); return false">
                         <input type="hidden" name="id" id="id">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
@@ -189,7 +188,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="javascript:clearForm('peopleform');" class="btn btn-primary">Limpar</a>
+                        <a href="javascript:clearForm('peopleform');" id="btnclear" class="btn btn-primary">Limpar</a>
                         <button id="submit_reg" type="submit" class="btn btn-primary">Salvar</button>
                         <div id="loadpreloadreg">
                             <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">

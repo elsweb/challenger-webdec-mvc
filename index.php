@@ -16,9 +16,11 @@ $router->post("/register", "Auth:register");
 /*module people*/
 $router->get("/pessoas", "Pessoas:index");
 $router->post("/pessoas", "Pessoas:listar");
-$router->post("/pessoas/save", "Pessoas:create");
+$router->post("/pessoas/create", "Pessoas:create");
 $router->delete("/pessoas/delete/{id}", "Pessoas:delete");
 $router->get("/pessoas/view/{id}", "Pessoas:view");
+/*later to convert to method "PUT", i tried but the not to accepted.*/
+$router->post("/pessoas/update", "Pessoas:update");
 
 
 $router->post("/json",function(){

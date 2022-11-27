@@ -3,6 +3,39 @@ namespace Controllers;
 
 class Validator
 {
+    public function uf($uf)
+    {
+        $siglas = [
+            'AC',
+            'AL',
+            'AP',
+            'AM',
+            'BA',
+            'CE',
+            'DF',
+            'ES',
+            'GO',
+            'MA',
+            'MS',
+            'MT',
+            'MG',
+            'PA',
+            'PB',
+            'PR',
+            'PE',
+            'PI',
+            'RJ',
+            'RN',
+            'RS',
+            'RO',
+            'RR',
+            'SC',
+            'SP',
+            'SE',
+            'TO',
+        ];
+        return in_array($uf, $siglas);
+    }
     public function onlyNumbers($string)
     {
         return preg_replace('/[^0-9]/', '', $string);

@@ -1,19 +1,27 @@
 $(document).ready(function () {
+    /*clear forms and set mask*/
+    clearForm('peopleform')
     $('#cpf').inputmask('999.999.999-99')
     $("#cep").inputmask("99999-999")
     $('#rg').inputmask('99.999.999-9')
+    /*get data to datatable*/
     fechData()
 });
+$(document).on('click', '.update', function () {
+    $("#datatable tbody tr td a").addClass('disabled')
+    var table = $('#datatable').DataTable();
+    let id = table.row($(this).parents('tr')).data()[0]
+    let row = table.row($(this).parents('tr'))
+    edit(id, row)
+});
 $(document).on('click', '.delete', function () {
-    $("#datatable tbody tr td a").addClass('disabled');
+    $("#datatable tbody tr td a").addClass('disabled')
     var table = $('#datatable').DataTable();
     let id = table.row($(this).parents('tr')).data()[0]
     let row = table.row($(this).parents('tr'))
     remove(id, row)
 });
-function clearForm(form) {
-    $(`#${form}`).trigger("reset");
-}
+
 function fechData() {
     $('#loadpreloadlist').fadeIn('slow')
     let base = $('meta[name=base_url]').attr('content')
@@ -41,6 +49,22 @@ function fechData() {
         }
     });
 }
+function save() {
+    /*change methods*/
+    let id = $('#peopleform #id').val()
+    if (id !== '') {
+        update()
+    } else {
+        create()
+    }
+    return false
+}
+function add(){
+    clearForm('peopleform')
+    $('#msgloadreg').css('display','none')
+    $('#btnclear').css('display', 'inline-block')
+    $('#registerModal').modal('toggle')
+}
 function create() {
     let base = $('meta[name=base_url]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
@@ -54,25 +78,24 @@ function create() {
         $('#loadpreloadreg').fadeIn('slow')
     }
     $.ajax({
-        url: `${base}/pessoas/save`,
+        url: `${base}/pessoas/create`,
         type: "POST",
         data: $('#peopleform').serialize(),
         headers: {
             'X-CSRF-TOKEN': csrf,
         },
         success: function (response) {
-            console.log(response)
-            $('#msgloadreg .alert').html(response.msg)
-            /*reload token for user login*/
+            /*reload token*/
             if (response.token !== undefined) {
                 $('meta[name=csrf]').attr('content', response.token);
             }
+            $('#msgloadreg .alert').html(response.msg)
             if (response.status) {
-                var table = $('#datatable').DataTable();
-                table.row.add(response.row).draw();
-                $('#peopleform').trigger("reset");
-                $('#registerModal').modal('toggle');
-                $('#loadpreloadreg').fadeOut('slow');
+                var table = $('#datatable').DataTable()
+                table.row.add(response.row).draw()
+                clearForm('peopleform')
+                $('#registerModal').modal('toggle')
+                $('#loadpreloadreg').fadeOut('slow')
             } else {
                 $('#loadpreloadreg').fadeOut('slow').queue(function () {
                     $('#msgloadreg').fadeIn('slow')
@@ -105,7 +128,7 @@ function remove(id, row) {
             if (response.status) {
                 row.remove().draw()
                 $('#loadpreloaddelete').fadeOut('slow')
-                $("#datatable tbody tr td a").removeClass('disabled');
+                $("#datatable tbody tr td a").removeClass('disabled')
             }
         },
         error: function (error) {
@@ -113,23 +136,58 @@ function remove(id, row) {
         }
     });
 }
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-function edit(id) {
+function update() {
     let base = $('meta[name=base_url]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
+    $("#submit_reg").attr("disabled", true)
+    if ($('#msgloadreg').is(":visible")) {
+        $('#msgloadreg').fadeOut('slow').queue(function () {
+            $('#loadpreloadreg').fadeIn('slow')
+            $(this).dequeue()
+        })
+    } else {
+        $('#loadpreloadreg').fadeIn('slow')
+    }
+    $.ajax({
+        url: `${base}/pessoas/update`,
+        type: "POST",
+        data: $('#peopleform').serialize(),
+        headers: {            
+            'X-CSRF-TOKEN': csrf,
+        },
+        success: function (response) {
+            /*reload token*/
+            if (response.token !== undefined) {
+                $('meta[name=csrf]').attr('content', response.token);
+            }
+            $("#submit_reg").attr("disabled", false)
+            $('#msgloadreg .alert').html(response.msg)
+            if (response.status) {
+                clearForm('peopleform')
+                updateRow(response.data)
+                $('#registerModal').modal('toggle')
+                $('#loadpreloadreg').fadeOut('slow')               
+            } else {
+                $('#loadpreloadreg').fadeOut('slow').queue(function () {
+                    $('#msgloadreg').fadeIn('slow')
+                    $(this).dequeue()
+                })
+            }
+            $("#submit_reg").attr("disabled", false)
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+}
+function edit(id, row) {
+    window.row = row
+    let base = $('meta[name=base_url]').attr('content')
+    let csrf = $('meta[name=csrf]').attr('content')
+    $("#datatable tbody tr td a").addClass('disabled')
     $('#loadpreloaddelete').fadeIn('slow')
+    $('#btnclear').css('display', 'none') 
+    $('#msgloadreg').css('display','none')   
     $.ajax({
         url: `${base}/pessoas/view/${id}`,
         type: "GET",
@@ -161,8 +219,9 @@ function edit(id) {
                 $('#peopleform #numero').val(enderecos.numero)
             }
             if (response.status) {
-                $('#loadpreloaddelete').fadeOut('slow').queue(function(){
+                $('#loadpreloaddelete').fadeOut('slow').queue(function () {
                     $('#registerModal').modal('toggle')
+                    $("#datatable tbody tr td a").removeClass('disabled')
                     $(this).dequeue()
                 })
             }
