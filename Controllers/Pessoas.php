@@ -59,7 +59,7 @@ class Pessoas
                     $end = $value->enderecos()->get();
                     $est = $end->estados()->get();
                     foreach ($value->telefones()->get() as $n) {
-                        $num[] = $n->telefone;
+                        $num[] = "<a href='javascript:;' id='phone_{$n->id}' class='removephone btn-sm btn-danger'>{$n->telefone}</a>";
                     }
                     $datatable[] = [
                         $value->id,
@@ -187,7 +187,7 @@ class Pessoas
                     "<a href='javascript:;' class='addphone'><i class='fas fa-plus-circle' style='font-size: 1.3rem;'></i></a>"
                 ];                
                 foreach ($pessoas->telefones()->get() as $n) {
-                    $num[] = $n->telefone;
+                    $num[] = "<a href='javascript:;' id='phone_{$n->id}' class='removephone btn-sm btn-danger'>{$n->telefone}</a>";
                 }
 
                 echo json_encode([
@@ -325,7 +325,7 @@ class Pessoas
                     "<a href='javascript:;' class='addphone'><i class='fas fa-plus-circle' style='font-size: 1.3rem;'></i></a>"
                 ];                
                 foreach ($pessoas->telefones()->get() as $n) {
-                    $num[] = $n->telefone;
+                    $num[] = "<a href='javascript:;' id='phone_{$n->id}' class='removephone btn-sm btn-danger'>{$n->telefone}</a>";
                 }
 
                 $row = [

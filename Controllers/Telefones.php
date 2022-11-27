@@ -38,7 +38,7 @@ class Telefones
                 $db = new \SimpleCrud\Database($pdo);
                 $db->setTablesClasses([
                     'pessoas' => \Model\Pessoas::class,
-                    'Telefones' => \Model\Telefones::class,
+                    'telefones' => \Model\Telefones::class,
                 ]);
 
                 /*create pessoas*/
@@ -57,12 +57,11 @@ class Telefones
                     "<a href='javascript:;' class='addphone'><i class='fas fa-plus-circle' style='font-size: 1.3rem;'></i></a>"
                 ];                
                 foreach ($pessoas->telefones()->get() as $n) {
-                    $num[] = $n->telefone;
+                    $num[] = "<a href='javascript:;' id='phone_{$n->id}' class='removephone btn-sm btn-danger'>{$n->telefone}</a>";
                 }
 
                 echo json_encode([
                     'status' => true,
-                    'msg' => "Obrigado por se cadastrar, agora pode acessar",
                     'row' => [
                         $pessoas->id,
                         $pessoas->nome,
@@ -108,17 +107,42 @@ class Telefones
                 $pdo = new \PDO("mysql:host=" . APP['DB_HOST'] . ";port=" . APP['DB_PORT'] . ";dbname=" . APP['DB_DATABASE'] . ";charset=utf8mb4", APP['DB_USERNAME'], APP['DB_PASSWORD']);
                 $db = new \SimpleCrud\Database($pdo);
                 $db->setTablesClasses([
-                    'pessoas' => \Model\Pessoas::class,
+                    'telefones' => \Model\Telefones::class,
                 ]);
-                $pessoas = $db->pessoas->select()
+                $telefones = $db->telefones->select()
                     ->whereEquals([
                         'id' => $id,
                     ])->one()->get();
-                $pessoas->data_exclusao = date('Y-m-d H:i:s');
-                $pessoas->save();
+
+                $pessoas = $db->pessoas->select()
+                ->whereEquals([
+                    'id' => $telefones->pessoas_id
+                ])->one()->get();                
+                $telefones->delete();
+
+                $num = [
+                    "<a href='javascript:;' class='addphone'><i class='fas fa-plus-circle' style='font-size: 1.3rem;'></i></a>"
+                ];                
+                foreach ($pessoas->telefones()->get() as $n) {
+                    $num[] = "<a href='javascript:;' id='phone_{$n->id}' class='removephone btn-sm btn-danger'>{$n->telefone}</a>";
+                }
+
                 echo json_encode([
                     'status' => true,
-                    'token' => $csrf->csrf()
+                    'row' => [
+                        $pessoas->id,
+                        $pessoas->nome,
+                        $pessoas->cpf,
+                        $pessoas->rg,
+                        "{$pessoas->enderecos()->get()->estados()->get()->uf} {$pessoas->enderecos()->get()->endereco} n° {$pessoas->enderecos()->get()->numero}",
+                        $pessoas->enderecos()->get()->cep,
+                        $num,
+                        [
+                            "<a href='javascript:edit(\"{$pessoas->id}\");'><i class='far fa-edit' style='font-size: 1.3rem;'></i></a>",
+                            "<a href='javascript:;' class='delete'><i class='far fa-trash-alt' style='font-size: 1.3rem;'></i></a>"
+                        ]
+                    ],
+                    'token' => $csrf->csrf(), // reload token for user login
                 ]);
                 return true;
             } catch (\PDOException $ex) {

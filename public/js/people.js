@@ -8,18 +8,22 @@ $(document).ready(function () {
     fechData()
 });
 $(document).on('click', '.update', function () {
-    $("#datatable tbody tr td a").addClass('disabled')
-    var table = $('#datatable').DataTable();
-    let id = table.row($(this).parents('tr')).data()[0]
-    let row = table.row($(this).parents('tr'))
-    edit(id, row)
+    if (confirm('Deseja atualziar este registro?')) {
+        $("#datatable tbody tr td a").addClass('disabled')
+        var table = $('#datatable').DataTable();
+        let id = table.row($(this).parents('tr')).data()[0]
+        let row = table.row($(this).parents('tr'))
+        edit(id, row)
+    }
 });
 $(document).on('click', '.delete', function () {
-    $("#datatable tbody tr td a").addClass('disabled')
-    var table = $('#datatable').DataTable();
-    let id = table.row($(this).parents('tr')).data()[0]
-    let row = table.row($(this).parents('tr'))
-    remove(id, row)
+    if (confirm('Deseja remover este registro?')) {
+        $("#datatable tbody tr td a").addClass('disabled')
+        var table = $('#datatable').DataTable();
+        let id = table.row($(this).parents('tr')).data()[0]
+        let row = table.row($(this).parents('tr'))
+        remove(id, row)
+    }
 });
 function fechData() {
     $('#loadpreloadlist').fadeIn('slow')

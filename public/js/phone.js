@@ -6,9 +6,19 @@ $(document).on('click', '.addphone', function () {
     var table = $('#datatable').DataTable();
     let id = table.row($(this).parents('tr')).data()[0]
     let row = table.row($(this).parents('tr'))
-    addPhone(id, row)
+    createPhone(id, row)
 })
-function addPhone(id, row) {
+$(document).on('click', '.removephone', function () {
+    if (confirm('Deseja remover este registro?')) {
+        $("#datatable tbody tr td a").addClass('disabled')
+        var table = $('#datatable').DataTable();
+        let id = $(this).attr('id').split('_')[1]
+        let row = table.row($(this).parents('tr'))
+        window.row = row
+        removePhone(id, row)
+    }
+})
+function createPhone(id, row) {
     window.row = row
     clearForm('phoneform')
     $('#pessoas_id').val(id)
@@ -53,6 +63,33 @@ function savePhone() {
                 })
             }
             $("#submit_phone").attr("disabled", false)
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+}
+function removePhone(id){
+    let base = $('meta[name=base_url]').attr('content')
+    let csrf = $('meta[name=csrf]').attr('content')
+    $('#loadpreloaddelete').fadeIn('slow')
+    $.ajax({
+        url: `${base}/telefones/delete/${id}`,
+        type: "DELETE",
+        data: {},
+        headers: {
+            'X-CSRF-TOKEN': csrf,
+        },
+        success: function (response) {
+            /*reload token for user login*/
+            if (response.token !== undefined) {
+                $('meta[name=csrf]').attr('content', response.token);
+            }
+            if (response.status) {
+                updateRow(response.row)
+                $('#loadpreloaddelete').fadeOut('slow')
+                $("#datatable tbody tr td a").removeClass('disabled')
+            }
         },
         error: function (error) {
             console.log(error)
