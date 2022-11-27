@@ -3,16 +3,14 @@
 ![N|Solid](https://drive.google.com/uc?id=1-lFd2viOP0urQQ_p9_fKngQ4R02Y3rgD)<share-social>
 
 # Challenger Webdec MVC
-========================
-Projeto de Competição de Challenger Webdec MVC.
 
-Bancos de dados suportados
--------------------
+ Projeto de Competição de Challenger Webdec MVC.
+
+## Bancos de dados suportados
 * MySQL
 
 Dependências
 ------------
-
 ### Runtime
 * PHP 7.3
 * Composer
@@ -37,8 +35,7 @@ or
 $ php composer.phar install
 ```
 
-Uso
-###### Configuração
+#### Configuração
 Crie um bando de dados,  renomeie o arquivo .env-example para .env
 e configure-o para iniciar o projeto
 ```
