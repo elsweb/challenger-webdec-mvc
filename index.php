@@ -12,6 +12,7 @@ $router->get("/", "Home:index");
 $router->get("/login", "Auth:index");
 $router->post("/login", "Auth:login");
 $router->post("/register", "Auth:register");
+$router->get("/logout", "Auth:logout");
 
 /*module people*/
 $router->get("/pessoas", "Pessoas:index");
@@ -31,6 +32,8 @@ $router->get("/{errcode}", function ($request) {
     $request = json_encode($request);
     Analog::handler (File::init ('log.txt'));
     Analog::log($request , Analog::ALERT);
+    $url = (APP['BASE_URL'] ?? 'localhost') . (APP['HOME_REDIRECT'] ?? '');
+    header("Location: {$url}");
 });
 
 $router->dispatch();

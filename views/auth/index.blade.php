@@ -56,9 +56,6 @@
                         Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"
                             class="ml-2">Inscrever-se</a>
                     </div>
-                    <div class="d-flex justify-content-center links">
-                        <a href="#">Esqueceu sua senha?</a>
-                    </div>
                 </div>
             </div>
         </div>

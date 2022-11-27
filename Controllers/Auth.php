@@ -71,6 +71,15 @@ class Auth
         ]);
         return false;
     }
+    public function logout(){
+        $auth_factory = new \Aura\Auth\AuthFactory($_SESSION);
+        $auth = $auth_factory->newInstance();
+        $logout_service = $auth_factory->newLogoutService();
+        $logout_service->logout($auth);
+        $url = (APP['BASE_URL'] ?? 'localhost') . (APP['HOME_REDIRECT'] ?? '');
+        header("Location: {$url}");
+        return false;
+    }
     public function register()
     {
         /*for force queue order ajax*/
