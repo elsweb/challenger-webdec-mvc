@@ -12,7 +12,8 @@ class Auth
     {
         $csrf = new \Controllers\CsrfProtect();
         if (self::getSession() === 'VALID'):
-            header("Location: " . APP['BASE_URL'] ?? 'localhost' . "");
+            $url = (APP['BASE_URL'] ?? 'localhost') . (APP['HOME_REDIRECT'] ?? '');
+            header("Location: {$url}");
         endif;
         $blade = new Blade('views', 'cache');
         echo $blade->make('auth.index', [

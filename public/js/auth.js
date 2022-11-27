@@ -65,6 +65,7 @@ function register() {
 }
 function auth() {
     let base = $('meta[name=base_url]').attr('content')
+    let redirect = $('meta[name=home_redirect]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
     $('#loadpreload').fadeIn('slow')
     $.ajax({
@@ -86,7 +87,7 @@ function auth() {
                     $(this).dequeue()
                 }).queue(function () {
                     setTimeout(function () {
-                        window.location.replace(base)
+                        window.location.replace(`${base}${redirect}`)
                     }, 3000)
                     $(this).dequeue()
                 })

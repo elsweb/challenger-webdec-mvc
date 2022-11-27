@@ -37,7 +37,5 @@
         src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/adminLTE320/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/adminLTE320/dist/js/adminlte.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/adminLTE320/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/assets/adminLTE320/dist/js/pages/dashboard.js"></script>
