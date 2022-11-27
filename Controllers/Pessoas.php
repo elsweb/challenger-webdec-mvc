@@ -216,7 +216,6 @@ class Pessoas
         ]);
         return false;
     }
-
     public function delete($id)
     {
         /*for force queue order ajax*/
@@ -239,6 +238,50 @@ class Pessoas
                 $pessoas->save();
                 echo json_encode([
                     'status' => true,
+                    'token' => $csrf->csrf()
+                ]);
+                return true;
+            } catch (\PDOException $ex) {
+                echo json_encode([
+                    "status" => false,
+                    "msg" => "Falha ao conectar",
+                    'error' => $ex,
+                    'token' => $csrf->csrf(),
+                ]);
+                return false;
+            }
+        endif;
+        echo json_encode([
+            "status" => false,
+            "msg" => "Ops algum erro aconteceu, csrf inválido tente recarregar a janela",
+        ]);
+        return false;
+    }
+    public function view($id){
+        /*for force queue order ajax*/
+        sleep(1);
+        header('Content-Type: application/json; charset=utf-8');
+        $csrf = new \Controllers\CsrfProtect();
+        if ($csrf->check($_SERVER['HTTP_X_CSRF_TOKEN'])):
+            $request = Request::input('POST')()->asArray();
+            try {
+                $pdo = new \PDO("mysql:host=" . APP['DB_HOST'] . ";port=" . APP['DB_PORT'] . ";dbname=" . APP['DB_DATABASE'] . ";charset=utf8mb4", APP['DB_USERNAME'], APP['DB_PASSWORD']);
+                $db = new \SimpleCrud\Database($pdo);
+                $db->setTablesClasses([
+                    'pessoas' => \Model\Pessoas::class,
+                ]);
+                $pessoas = $db->pessoas->select()
+                    ->whereEquals([
+                        'id' => $id,
+                    ])->one()->get();
+                
+                echo json_encode([
+                    'status' => true,
+                    'data' => [
+                        'pessoas' => $pessoas,
+                        'enderecos' => $pessoas->enderecos()->get(),
+                        'estados' => $pessoas->enderecos()->get()->estados()->get(),
+                    ],
                     'token' => $csrf->csrf()
                 ]);
                 return true;

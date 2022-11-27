@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#cpf').inputmask('999.999.999-99')
     $("#cep").inputmask("99999-999")
     $('#rg').inputmask('99.999.999-9')
-    fechData()    
+    fechData()
 });
 $(document).on('click', '.delete', function () {
     $("#datatable tbody tr td a").addClass('disabled');
@@ -11,7 +11,7 @@ $(document).on('click', '.delete', function () {
     let row = table.row($(this).parents('tr'))
     remove(id, row)
 });
-function clearForm(form){
+function clearForm(form) {
     $(`#${form}`).trigger("reset");
 }
 function fechData() {
@@ -112,10 +112,65 @@ function remove(id, row) {
             console.log(error)
         }
     });
-
 }
-function edit($id) {
-    alert($id)
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+function edit(id) {
+    let base = $('meta[name=base_url]').attr('content')
+    let csrf = $('meta[name=csrf]').attr('content')
+    $('#loadpreloaddelete').fadeIn('slow')
+    $.ajax({
+        url: `${base}/pessoas/view/${id}`,
+        type: "GET",
+        data: {},
+        headers: {
+            'X-CSRF-TOKEN': csrf,
+        },
+        success: function (response) {
+            /*reload token for user login*/
+            if (response.token !== undefined) {
+                $('meta[name=csrf]').attr('content', response.token);
+            }
+            if (response.data.pessoas !== undefined) {
+                let pessoas = response.data.pessoas
+                $('#peopleform #id').val(pessoas.id)
+                $('#peopleform #nome').val(pessoas.nome)
+                $('#peopleform #cpf').val(pessoas.cpf)
+                $('#peopleform #rg').val(pessoas.rg)
+                $('#peopleform #data_nascimento').val(formatDate(pessoas.data_nascimento.date))
+            }
+            if (response.data.estados !== undefined) {
+                let estados = response.data.estados
+                $('#peopleform #uf').val(estados.uf)
+            }
+            if (response.data.enderecos !== undefined) {
+                let enderecos = response.data.enderecos
+                $('#peopleform #cep').val(enderecos.cep)
+                $('#peopleform #endereco').val(enderecos.endereco)
+                $('#peopleform #numero').val(enderecos.numero)
+            }
+            if (response.status) {
+                $('#loadpreloaddelete').fadeOut('slow').queue(function(){
+                    $('#registerModal').modal('toggle')
+                    $(this).dequeue()
+                })
+            }
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
 }
 function addphone($id) {
     alert($id)

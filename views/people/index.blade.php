@@ -113,6 +113,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="peopleform" onSubmit="create(); return false">
+                        <input type="hidden" name="id" id="id">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text">Nome*</span>
@@ -189,7 +190,7 @@
                             </div>
                         </div>
                         <a href="javascript:clearForm('peopleform');" class="btn btn-primary">Limpar</a>
-                        <button id="submit_reg" type="submit" class="btn btn-primary" style="float: right;">Salvar</button>                        
+                        <button id="submit_reg" type="submit" class="btn btn-primary">Salvar</button>
                         <div id="loadpreloadreg">
                             <img width="30" src="{{APP['BASE_URL'] ?? 'localhost'}}/public/img/load.svg">
                         </div>
@@ -241,9 +242,6 @@
     <script src="{{APP['BASE_URL'] ??
             'localhost'}}/public/assets/adminLTE320/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{APP['BASE_URL'] ??
-            'localhost'}}/public/assets/adminLTE320/dist/js/demo.js"></script>
-    <!-- Page specific script -->
     <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/js/helper.js?t={{time()}}"></script>
     <script src="{{APP['BASE_URL'] ?? 'localhost'}}/public/js/people.js?t={{time()}}"></script>
 
