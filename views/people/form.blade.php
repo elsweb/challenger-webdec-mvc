@@ -95,8 +95,9 @@
                             </div>
                         </div>
                     </div>
-                    <a href="javascript:clearForm('peopleform');" id="btnclear"
-                        class="btn btn-primary">Limpar</a>
+                    
+                    <button type="button" onclick="clearForm('peopleform')" id="btnclear"
+                        class="btn btn-primary">Limpar</button>
                     <button id="submit_reg" type="submit" class="btn
                         btn-primary">Salvar</button>
                     <div id="loadpreloadreg">

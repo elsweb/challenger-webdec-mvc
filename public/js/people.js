@@ -72,6 +72,7 @@ function create() {
     let base = $('meta[name=base_url]').attr('content')
     let csrf = $('meta[name=csrf]').attr('content')
     $("#submit_reg").attr("disabled", true)
+    $("#btnclear").attr("disabled", true)
     if ($('#msgloadreg').is(":visible")) {
         $('#msgloadreg').fadeOut('slow').queue(function () {
             $('#loadpreloadreg').fadeIn('slow')
@@ -96,7 +97,6 @@ function create() {
             if (response.status) {
                 var table = $('#datatable').DataTable()
                 table.row.add(response.row).draw()
-                clearForm('peopleform')
                 $('#registerModal').modal('toggle')
                 $('#loadpreloadreg').fadeOut('slow')
             } else {
@@ -106,6 +106,7 @@ function create() {
                 })
             }
             $("#submit_reg").attr("disabled", false)
+            $("#btnclear").attr("disabled", false)
         },
         error: function (error) {
             console.log(error)
@@ -166,7 +167,6 @@ function update() {
             $("#submit_reg").attr("disabled", false)
             $('#msgloadreg .alert').html(response.msg)
             if (response.status) {
-                clearForm('peopleform')
                 updateRow(response.data)
                 $('#registerModal').modal('toggle')
                 $('#loadpreloadreg').fadeOut('slow')

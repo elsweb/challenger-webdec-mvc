@@ -306,7 +306,7 @@ class Pessoas
                     $estados = $estados_check;
                 endif;
                 $enderecos = $pessoas->enderecos()->get();
-                
+                $pessoas->data_atualizacao = date('Y-m-d H:i:s');
                 $pessoas->nome = $request['nome'] ?? null;
                 $pessoas->data_nascimento = $request['data_nascimento'] ?? null;
                 /*validate cpf and rg*/
