@@ -45,7 +45,6 @@ function savePhone() {
             'X-CSRF-TOKEN': csrf,
         },
         success: function (response) {
-            console.log(response)
             /*reload token*/
             if (response.token !== undefined) {
                 $('meta[name=csrf]').attr('content', response.token);
